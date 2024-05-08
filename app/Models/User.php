@@ -13,6 +13,9 @@ class User extends Model
     protected $keyType = 'int';
     public $timestamps = true;
     public $incrementing = true;
+    protected $fillable = [
+        'username', 'password', 'name'
+    ];
     public function contacts(): HasMany
     {
         return $this->hasMany(Contact::class,'user_id','id');
