@@ -180,9 +180,7 @@
                     {
                         "name": "Authorization",
                         "in": "header",
-                        "schema": {
-                            "type": "string"
-                        }
+                        "schema": {}
                     }
                 ],
                 "responses": {
@@ -224,9 +222,7 @@
                     {
                         "name": "Authorization",
                         "in": "header",
-                        "schema": {
-                            "type": "string"
-                        }
+                        "schema": {}
                     }
                 ],
                 "requestBody": {
@@ -288,9 +284,7 @@
                     {
                         "name": "Authorization",
                         "in": "header",
-                        "schema": {
-                            "type": "string"
-                        }
+                        "schema": {}
                     }
                 ],
                 "responses": {
