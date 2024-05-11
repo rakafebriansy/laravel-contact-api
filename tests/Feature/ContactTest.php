@@ -249,7 +249,7 @@ class ContactTest extends TestCase
         ])->assertStatus(200)->json();
 
 
-        Log::channel('stderr')->info(json_encode($response,JSON_PRETTY_PRINT));
+        // Log::channel('stderr')->info(json_encode($response,JSON_PRETTY_PRINT));
         self::assertEquals(5,count($response['data']));
         self::assertEquals(20,$response['meta']['total']);
         self::assertEquals(2,$response['meta']['current_page']);
