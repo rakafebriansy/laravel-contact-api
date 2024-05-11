@@ -184,7 +184,7 @@ class AddressTest extends TestCase
     {
         $this->seed([UserSeeder::class,ContactSeeder::class,AddressSeeder::class]);
         $address = Address::limit(1)->first();
-        $this->delete('/api/contacts/'.$address->contact_id.'/addresses/'.$address->id,[
+        $this->delete('/api/contacts/'.$address->contact_id.'/addresses/'.$address->id,headers:[
             'Authorization' => 'test'
         ])->assertStatus(200)->assertJson([
             'data' => true
@@ -194,9 +194,39 @@ class AddressTest extends TestCase
     {
         $this->seed([UserSeeder::class,ContactSeeder::class,AddressSeeder::class]);
         $address = Address::limit(1)->first();
-        $this->delete('/api/contacts/'.$address->contact_id.'/addresses/'.$address->id + 1,[
+        $this->delete('/api/contacts/'.$address->contact_id.'/addresses/'.$address->id + 1,headers:[
+            'Authorization' => 'test'
+        ])->assertStatus(404)->assertJson([
+            'errors' => [
+                'message' => ['not found']
+            ]
+        ]);
+    }
+    public function testListSuccess()
+    {
+        $this->seed([UserSeeder::class,ContactSeeder::class,AddressSeeder::class]);
+        $contact = Contact::limit(1)->first();
+        $this->get('/api/contacts/'.$contact->id.'/addresses',[
             'Authorization' => 'test'
         ])->assertStatus(200)->assertJson([
+            'data' => [
+                [
+                    'street' => 'test',
+                    'city' => 'test',
+                    'province' => 'test',
+                    'country' => 'test',
+                    'postal_code' => '123123',
+                ]
+            ]
+        ]);
+    }
+    public function testListContactNotFound()
+    {
+        $this->seed([UserSeeder::class,ContactSeeder::class,AddressSeeder::class]);
+        $contact = Contact::limit(1)->first();
+        $this->get('/api/contacts/'.($contact->id + 1).'/addresses',[
+            'Authorization' => 'test'
+        ])->assertStatus(404)->assertJson([
             'errors' => [
                 'message' => ['not found']
             ]
