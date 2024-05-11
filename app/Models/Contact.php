@@ -14,6 +14,9 @@ class Contact extends Model
     protected $keyType = 'int';
     public $timestamps = true;
     public $incrementing = true;
+    protected $fillable = [
+        'first_name', 'last_name', 'email', 'phone'
+    ];
 
     public function user(): BelongsTo
     {
