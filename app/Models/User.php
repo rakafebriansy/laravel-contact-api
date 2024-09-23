@@ -45,4 +45,8 @@ class User extends Model implements Authenticatable
     {
         return 'token';
     }
+    public function getAuthPasswordName()
+    {
+        return 'password';
+    }
 }
